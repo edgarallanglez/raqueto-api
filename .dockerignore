@@ -1,0 +1,12 @@
+
+.git
+.gitignore
+!.env.template
+*.md
+.DS_Store
+npm-debug.log
+yarn-error.log
+coverage
+.vscode
+.idea
+

@@ -1,0 +1,11 @@
+gcloud run deploy medusa-raqueto-app-worker \
+    --image="us-central1-docker.pkg.dev/medusa-world/medusajs/medusa-raqueto-app-worker:latest" \
+    --region="us-central1" \
+    --allow-unauthenticated \
+    --min-instances=1 \
+    --max-instances=4 \
+    --cpu=1 \
+    --memory=1Gi \
+    --port=8080 \
+    --env-vars-file=env.yaml \
+    --update-env-vars="MEDUSA_WORKER_MODE=worker,DISABLE_MEDUSA_ADMIN=true"

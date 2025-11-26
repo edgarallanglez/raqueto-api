@@ -1,0 +1,44 @@
+{
+  "bag_type": {
+    "value": "",
+    "label": "Bag Type"
+  },
+  "capacity": {
+    "value": "",
+    "label": "Capacity"
+  },
+  "racquet_capacity": {
+    "value": "",
+    "label": "Racquet Capacity"
+  },
+  "dimensions": {
+    "value": "",
+    "label": "Dimensions"
+  },
+  "weight": {
+    "value": "",
+    "unit": "kg"
+  },
+  "material": {
+    "value": "",
+    "label": "Material"
+  },
+  "compartments": {
+    "value": "",
+    "label": "Compartments"
+  },
+  "thermal_protection": {
+    "value": "",
+    "label": "Thermal Protection"
+  },
+  "carrying_options": {
+    "value": "",
+    "label": "Carrying Options"
+  },
+  "color": {
+    "value": "",
+    "label": "Color"
+  }
+}
+
+

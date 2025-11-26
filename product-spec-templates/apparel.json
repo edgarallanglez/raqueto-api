@@ -1,0 +1,44 @@
+{
+  "fabric": {
+    "value": "",
+    "label": "Fabric Composition"
+  },
+  "fit": {
+    "value": "",
+    "label": "Fit Type"
+  },
+  "care_instructions": {
+    "value": "",
+    "label": "Care Instructions"
+  },
+  "technology": {
+    "value": "",
+    "label": "Technology"
+  },
+  "moisture_wicking": {
+    "value": "",
+    "label": "Moisture Wicking"
+  },
+  "uv_protection": {
+    "value": "",
+    "label": "UV Protection"
+  },
+  "stretch": {
+    "value": "",
+    "label": "Stretch"
+  },
+  "sleeve_length": {
+    "value": "",
+    "label": "Sleeve Length"
+  },
+  "collar_type": {
+    "value": "",
+    "label": "Collar Type"
+  },
+  "features": {
+    "value": "",
+    "label": "Key Features"
+  }
+}
+
+

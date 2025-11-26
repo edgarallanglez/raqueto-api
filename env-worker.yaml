@@ -1,0 +1,78 @@
+# ---------------------------
+# CORS (PROD)
+# ---------------------------
+STORE_CORS: "https://raqueto.shop"
+ADMIN_CORS: "https://api.raqueto.shop"
+VENDOR_CORS: "https://vendor.raqueto.shop"
+AUTH_CORS: "https://raqueto.shop,https://api.raqueto.shop,https://vendor.raqueto.shop,https://medusa-raqueto-app-636966506388.us-central1.run.app"
+MEDUSA_BACKEND_URL: "https://api.raqueto.shop"
+# ---------------------------
+# Redis (opcional, si usas jobs, cart recovery)
+# ---------------------------
+REDIS_URL: "rediss://default:AVNS_MHimx4PZaUH0g14P99r@valkey-db-raqueto-redis.g.aivencloud.com:14003"
+REDIS_SERVER_NAME: "valkey-db-raqueto-redis.g.aivencloud.com"
+# ---------------------------
+# CORS (LOCAL) — sólo referencia; usar en env.local.yaml
+# ---------------------------
+STORE_CORS_LOCAL: "http://localhost:8000"
+ADMIN_CORS_LOCAL: "http://localhost:5173,http://localhost:9000"
+AUTH_CORS_LOCAL: "http://localhost:5173,http://localhost:9000,http://localhost:8000"
+
+# ---------------------------
+# PostHog (Analytics)
+# ---------------------------
+POSTHOG_EVENTS_API_KEY: "phc_FY1YuCLTaRRScp5idLsnVfWECrUtNslNJeUJqqkz5Ra"
+POSTHOG_HOST: "https://us.i.posthog.com"
+
+# ---------------------------
+# Seguridad
+# ---------------------------
+JWT_SECRET: "b71fc8b3b6a32240fb502a490e982c5d"
+COOKIE_SECRET: "b71fc8b3b6a32240fb502a490e982c5d"
+DATABASE_URL: "postgresql://postgres.dgzabnbxccldrvteyncb:TLiTx1hwx0Mzqhuc@aws-1-us-west-1.pooler.supabase.com:6543/postgres"
+SUPABASE_URL: "https://dgzabnbxccldrvteyncb.supabase.co"
+SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRnemFibmJ4Y2NsZHJ2dGV5bmNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY3NzA4OTYsImV4cCI6MjA3MjM0Njg5Nn0.FuvUa79RfTzTXtQo573r9HTn3tHBV18IIh0UcWYOLzY"
+DB_NAME: "postgres"
+
+STRIPE_SECRET_API_KEY: "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"
+STRIPE_WEBHOOK_SECRET: "whsec_reyzXkaRcJuO3xnfJoPSz1JAAjybRIz6"
+
+RESEND_API_KEY: "re_SkTwZW3g_6SRrxpTh6i1NawDHfWYdgr71"
+RESEND_FROM_EMAIL: "hola@raqueto.shop"
+
+ALGOLIA_APP_ID: "FADXAE7MAZ"
+ALGOLIA_API_KEY: "5ba619371f5879a15fa79a3759504f53"
+
+# Used in notifications (estos valores están en localhost en tu .env original)
+VENDOR_PANEL_URL: "http://localhost:5173"
+STOREFRONT_URL: "http://localhost:7001"
+BACKEND_URL: "http://localhost:9000"
+
+NODE_ENV: "production"
+LOG_LEVEL: "info"
+
+# ---------------------------
+# Configuración básica Medusa
+# ---------------------------
+MEDUSA_ADMIN_ONBOARDING_TYPE: "default"
+# PORT and HOST are set automatically by Cloud Run
+# LOG_LEVEL ya definido arriba
+
+# ---------------------------
+# Cloud Storage (assets)
+# ---------------------------
+BUCKET_NAME: "raqueto-assets"
+GCP_PROJECT_ID: "medusa-world"
+GCP_REGION: "us-central1"
+
+S3_FILE_URL: "https://s3.raqueto.shop"
+S3_ACCESS_KEY_ID: "09f81ae8ed4575cc273a9cfa908606e2"
+S3_SECRET_ACCESS_KEY: "b75a9f77c9c6e15b425a49cba3cfe8e8149ea308c2a4b1cf7049fde460d0ea54"
+S3_REGION: "auto"
+S3_BUCKET: "raqueto-assets"
+S3_ENDPOINT: "https://9353f717e1c34332b27b95b39c82729f.r2.cloudflarestorage.com"
+
+# ---------------------------
+# Telemetría
+# ---------------------------
+MEDUSA_TELEMETRY_DISABLED: "true"

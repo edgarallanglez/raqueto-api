@@ -1,0 +1,55 @@
+{
+    "head_size": {
+        "value": "98 sq in",
+        "label": "Tamaño de cabeza"
+    },
+    "weight": {
+        "value": "305",
+        "label": "Peso",
+        "unit": "g"
+    },
+    "string_pattern": {
+        "value": "16x19",
+        "label": "Patrón de cuerdas"
+    },
+    "material": {
+        "value": "HM Graphite / 2G-Namd™ Speed / VDM",
+        "label": "Material"
+    },
+    "length": {
+        "value": "27",
+        "unit": "in"
+    },
+    "balance": {
+        "value": "315mm",
+        "label": "Punto de balance"
+    },
+    "beam_width": {
+        "value": "23.8mm / 24.5mm / 19.5mm",
+        "label": "Ancho del marco"
+    },
+    "stiffness": {
+        "value": "65 RA",
+        "label": "Rigidez (RA)"
+    },
+    "swing_weight": {
+        "value": "",
+        "label": "Peso de swing"
+    },
+    "recommended_tension": {
+        "value": "45 - 60 lbs",
+        "label": "Tensión recomendada"
+    },
+    "grip_type": {
+        "value": "",
+        "label": "Tipo de grip"
+    },
+    "player_level": {
+        "value": "Intermedio – Avanzado",
+        "label": "Nivel de jugador"
+    },
+    "play_style": {
+        "value": "Jugadores ofensivos que buscan velocidad y control sin sacrificar comodidad",
+        "label": "Estilo de juego"
+    }
+}

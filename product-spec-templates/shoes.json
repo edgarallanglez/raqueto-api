@@ -1,0 +1,52 @@
+{
+  "shoe_type": {
+    "value": "",
+    "label": "Shoe Type"
+  },
+  "weight": {
+    "value": "",
+    "unit": "oz"
+  },
+  "heel_drop": {
+    "value": "",
+    "label": "Heel-to-Toe Drop"
+  },
+  "cushioning": {
+    "value": "",
+    "label": "Cushioning Level"
+  },
+  "surface": {
+    "value": "",
+    "label": "Court Surface"
+  },
+  "upper_material": {
+    "value": "",
+    "label": "Upper Material"
+  },
+  "sole_material": {
+    "value": "",
+    "label": "Sole Material"
+  },
+  "width_options": {
+    "value": "",
+    "label": "Width Options"
+  },
+  "closure_type": {
+    "value": "",
+    "label": "Closure Type"
+  },
+  "support_level": {
+    "value": "",
+    "label": "Support Level"
+  },
+  "flexibility": {
+    "value": "",
+    "label": "Flexibility"
+  },
+  "breathability": {
+    "value": "",
+    "label": "Breathability"
+  }
+}
+
+

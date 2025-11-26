@@ -1,0 +1,36 @@
+{
+  "accessory_type": {
+    "value": "",
+    "label": "Type"
+  },
+  "dimensions": {
+    "value": "",
+    "label": "Dimensions"
+  },
+  "weight": {
+    "value": "",
+    "unit": "g"
+  },
+  "material": {
+    "value": "",
+    "label": "Material"
+  },
+  "color": {
+    "value": "",
+    "label": "Color"
+  },
+  "compatibility": {
+    "value": "",
+    "label": "Compatibility"
+  },
+  "features": {
+    "value": "",
+    "label": "Key Features"
+  },
+  "usage": {
+    "value": "",
+    "label": "Usage"
+  }
+}
+
+
