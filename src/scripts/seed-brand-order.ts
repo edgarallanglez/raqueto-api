@@ -21,7 +21,8 @@ export default async ({ container }: { container: MedusaContainer }) => {
   for (const brand of brands) {
     // Only update if order is null
     if (brand.order === null || brand.order === undefined) {
-      await brandModuleService.updateBrands([brand.id], {
+      await brandModuleService.updateBrands({
+        id: brand.id,
         order: 999,
       })
       console.log(`  ✅ Set order=999 for brand: ${brand.name} (${brand.id})`)

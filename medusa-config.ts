@@ -6,38 +6,38 @@ const commonRedisOptions = {
   // 1. Force IPv4: Critical for Cloud Run to avoid IPv6 timeouts
   dnsLookup: (hostname, cb) => dns.lookup(hostname, { family: 4 }, cb),
 
-  // 2. REMOVE the explicit 'tls' object. 
-  // Since you use 'rediss://' in the URL, ioredis automatically handles TLS and SNI.
-  // Adding it manually often causes conflicts or double-wrapping.
+  // 2. Connection Settings - More lenient timeouts
+  connectTimeout: 10000, // 10s for initial connection
   
-  // 3. Connection Settings
-  connectTimeout: 10000, // Reduced to 10s. If it takes longer, fail fast and retry.
+  // 3. KeepAlive - Prevent idle connection drops
+  keepAlive: 30000, // Send keepalive every 30s
   
-  // 4. KeepAlive is tricky in Cloud Run. 
-  // We set it, but we rely more on retry strategies.
-  keepAlive: 10000, 
-  
-  // 5. CRITICAL FIX: Disable maxRetriesPerRequest
-  // Medusa requires this to be null so ioredis queues commands during a reconnection
-  // instead of failing them immediately when the socket resets.
+  // 4. CRITICAL: Disable maxRetriesPerRequest for Medusa compatibility
+  // Allows ioredis to queue commands during reconnection instead of failing
   maxRetriesPerRequest: null,
 
-  // 6. Reconnection Strategy
+  // 5. Connection Pool & Retry Settings
   enableReadyCheck: true,
   enableOfflineQueue: true,
-  lazyConnect: true, // Changed to true to prevent startup hangs
+  lazyConnect: true, // Lazy connect to avoid blocking startup
+  autoResubscribe: true,
+  autoResendUnfulfilledCommands: true,
   
+  // 6. Retry Strategy - Exponential backoff with reasonable limits
   retryStrategy(times: number) {
-    // Retry immediately first, then back off
-    const delay = Math.min(times * 50, 2000);
+    if (times > 10) {
+      return null; // Stop after 10 attempts
+    }
+    // 100ms, 200ms, 400ms, 800ms, max 2s
+    const delay = Math.min(times * 100, 2000);
     return delay;
   },
 
-  // 7. Aggressive Reconnect on Error
+  // 7. Reconnect on specific errors
   reconnectOnError(err: Error) {
     const targetErrors = ['READONLY', 'ETIMEDOUT', 'ECONNRESET', 'ENOTFOUND', 'ECONNREFUSED']
     if (targetErrors.some(targetError => err.message.includes(targetError))) {
-      return true
+      return 1; // Just reconnect, don't retry command
     }
     return false
   },
@@ -47,6 +47,8 @@ module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
     redisUrl: process.env.REDIS_URL,
+    // Redis options for session storage (follows official MedusaJS pattern)
+    redisOptions: commonRedisOptions,
     workerMode: process.env.MEDUSA_WORKER_MODE as "shared" | "worker" | "server",
     http: {
       storeCors: process.env.STORE_CORS!,

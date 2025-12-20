@@ -15,6 +15,7 @@ import { orderPlacedEmail } from "./emails/order-placed";
 import { orderPlacedAdminEmail } from "./emails/order-placed-admin";
 import { userInvitedEmail } from "./emails/user-invited";
 import { passwordResetEmail } from "./emails/password-reset";
+import { newsletterWelcomeEmail } from "./emails/newsletter-welcome";
 
 
 enum Templates {
@@ -22,13 +23,15 @@ enum Templates {
     ORDER_PLACED_ADMIN = "order-placed-admin",
     USER_INVITED = "user-invited",
     PASSWORD_RESET = "password-reset",
+    NEWSLETTER_WELCOME = "newsletter-welcome",
 }
 
 const templates: { [key in Templates]?: (props: unknown) => React.ReactNode } = {
     [Templates.ORDER_PLACED]: orderPlacedEmail,
     [Templates.ORDER_PLACED_ADMIN]: orderPlacedAdminEmail,
     [Templates.USER_INVITED]: userInvitedEmail,
-    [Templates.PASSWORD_RESET]: passwordResetEmail
+    [Templates.PASSWORD_RESET]: passwordResetEmail,
+    [Templates.NEWSLETTER_WELCOME]: newsletterWelcomeEmail,
 }
 
 type ResendOptions = {
@@ -102,6 +105,8 @@ class ResendNotificationProviderService extends AbstractNotificationProviderServ
                 return "You're Invited!"
             case Templates.PASSWORD_RESET:
                 return "Reset Your Password"
+            case Templates.NEWSLETTER_WELCOME:
+                return "🎾 ¡Bienvenido a Raqueto! Tu código WELCOME5 te espera"
             default:
                 return "New Email"
         }

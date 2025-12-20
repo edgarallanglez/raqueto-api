@@ -16,7 +16,7 @@ import { defineLink } from "@medusajs/framework/utils"
 export default defineLink(
   {
     linkable: ProductModule.linkable.product,
-    isList: true, // One brand can have many products
+    isList: true,
   },
   BrandModule.linkable.brand
 )

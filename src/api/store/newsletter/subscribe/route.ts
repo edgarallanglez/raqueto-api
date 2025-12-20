@@ -1,5 +1,6 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework"
 import { z } from "zod"
+import { Modules } from "@medusajs/framework/utils"
 
 // Validation schema
 const subscribeSchema = z.object({
@@ -14,10 +15,15 @@ const subscribeSchema = z.object({
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const newsletterModuleService = req.scope.resolve("newsletterModuleService")
+  const notificationService = req.scope.resolve(Modules.NOTIFICATION)
 
   try {
     // Validate input
     const validated = subscribeSchema.parse(req.body)
+
+    // Check if this is a new subscription
+    const existingSubscription = await newsletterModuleService.retrieveByEmail(validated.email)
+    const isNewSubscription = !existingSubscription || existingSubscription.status === "unsubscribed"
 
     // Subscribe email
     const subscription = await newsletterModuleService.subscribe(
@@ -32,6 +38,24 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         },
       }
     )
+
+    // Send welcome email for new subscriptions
+    if (isNewSubscription) {
+      try {
+        await notificationService.createNotifications({
+          to: validated.email,
+          channel: "email",
+          template: "newsletter-welcome",
+          data: {
+            email: validated.email,
+            promoCode: "WELCOME5",
+          },
+        })
+      } catch (emailError) {
+        // Log but don't fail the subscription
+        console.error("Failed to send welcome email:", emailError)
+      }
+    }
 
     res.status(200).json({
       success: true,

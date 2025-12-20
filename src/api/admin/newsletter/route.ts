@@ -49,7 +49,11 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const newsletterModuleService = req.scope.resolve("newsletterModuleService")
 
   try {
-    const { email, source, preferences } = req.body
+    const { email, source, preferences } = req.body as {
+      email?: string
+      source?: string
+      preferences?: Record<string, any>
+    }
 
     if (!email) {
       return res.status(400).json({

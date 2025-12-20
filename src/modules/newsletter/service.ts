@@ -31,7 +31,8 @@ class NewsletterModuleService extends MedusaService({
     if (existing) {
       // If unsubscribed, reactivate
       if (existing.status === "unsubscribed") {
-        return await this.updateNewsletterSubscriptions(existing.id, {
+        return await this.updateNewsletterSubscriptions({
+          id: existing.id,
           status: "active",
           ...options,
         })
@@ -60,7 +61,8 @@ class NewsletterModuleService extends MedusaService({
       throw new Error("Email not found in newsletter list")
     }
 
-    return await this.updateNewsletterSubscriptions(subscription.id, {
+    return await this.updateNewsletterSubscriptions({
+      id: subscription.id,
       status: "unsubscribed",
     })
   }
@@ -86,7 +88,8 @@ class NewsletterModuleService extends MedusaService({
       return null
     }
 
-    return await this.updateNewsletterSubscriptions(subscription.id, {
+    return await this.updateNewsletterSubscriptions({
+      id: subscription.id,
       customer_id: customerId,
     })
   }

@@ -59,7 +59,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
               <Row>
                 <Column align="center">
                   <Img 
-                    src="https://raqueto.shop/Logo.png" 
+                    src="https://raqueto.shop/raqueto-logo-white.png" 
                     alt="Raqueto" 
                     width="180" 
                     height="42"
