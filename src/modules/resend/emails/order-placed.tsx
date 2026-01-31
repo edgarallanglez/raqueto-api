@@ -51,7 +51,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
     <Tailwind>
       <Html className="font-sans bg-neutral-50">
         <Head />
-        <Preview>Thank you for your order from Medusa</Preview>
+        <Preview>Gracias por tu compra en Raqueto</Preview>
         <Body className="bg-white my-10 mx-auto w-full max-w-2xl">
           {/* Header */}
           <Section className="text-white px-8 py-6" style={{ backgroundColor: '#021326' }}>
