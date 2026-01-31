@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { createBrandWorkflow } from "../../../workflows/create-brand"
-import { z } from "zod"
+import { z } from "@medusajs/framework/zod"
 import { PostAdminCreateBrand } from "./validators"
 
 type PostAdminCreateBrandType = z.infer<typeof PostAdminCreateBrand>

@@ -1,5 +1,5 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework"
-import { z } from "zod"
+import { z } from "@medusajs/framework/zod"
 import { Modules } from "@medusajs/framework/utils"
 
 // Validation schema

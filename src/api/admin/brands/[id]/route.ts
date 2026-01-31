@@ -2,7 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { updateBrandWorkflow } from "../../../../workflows/update-brand"
 import { deleteBrandWorkflow } from "../../../../workflows/delete-brand"
-import { z } from "zod"
+import { z } from "@medusajs/framework/zod"
 import { PostAdminUpdateBrand } from "../validators"
 
 type PostAdminUpdateBrandType = z.infer<typeof PostAdminUpdateBrand>
