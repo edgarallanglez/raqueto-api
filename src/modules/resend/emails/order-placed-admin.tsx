@@ -47,7 +47,28 @@ function OrderPlacedAdminEmailComponent({ order }: OrderPlacedAdminEmailProps) {
   return (
     <Tailwind>
       <Html className="font-sans bg-neutral-50">
-        <Head />
+        <Head>
+          <meta name="color-scheme" content="light" />
+          <meta name="supported-color-schemes" content="light" />
+          <style>{`
+            @media (prefers-color-scheme: dark) {
+              .accent-bar {
+                background-color: #E0FA5B !important;
+              }
+              .order-number {
+                color: #E0FA5B !important;
+              }
+              .admin-button {
+                background-color: #000000 !important;
+                color: #ffffff !important;
+              }
+              .footer-logo {
+                filter: none !important;
+                opacity: 1 !important;
+              }
+            }
+          `}</style>
+        </Head>
         <Preview>{`🔔 Nueva orden #${order.display_id} - ${formatPrice(order.total)}`}</Preview>
         <Body className="bg-neutral-100 my-10 mx-auto w-full max-w-2xl">
           {/* Header */}
@@ -58,7 +79,7 @@ function OrderPlacedAdminEmailComponent({ order }: OrderPlacedAdminEmailProps) {
                   <Heading className="text-2xl font-bold m-0">🔔 Nueva Orden Recibida</Heading>
                 </Column>
                 <Column align="right">
-                  <Text className="text-[#E0FA5B] text-xl font-bold m-0">
+                  <Text className="text-[#E0FA5B] text-xl font-bold m-0 order-number" style={{ color: '#E0FA5B' }}>
                     #{order.display_id}
                   </Text>
                 </Column>
@@ -67,7 +88,7 @@ function OrderPlacedAdminEmailComponent({ order }: OrderPlacedAdminEmailProps) {
           </Section>
 
           {/* Accent Bar */}
-          <Section className="bg-[#E0FA5B] h-2" />
+          <Section className="bg-[#E0FA5B] h-2 accent-bar" style={{ backgroundColor: '#E0FA5B', height: '8px' }} />
 
           {/* Alert Box */}
           <Container className="max-w-2xl mx-auto bg-white my-6 rounded-lg shadow-lg p-6">
@@ -92,7 +113,7 @@ function OrderPlacedAdminEmailComponent({ order }: OrderPlacedAdminEmailProps) {
             <Section className="mt-6 pt-4 border-t border-neutral-200">
               <Button
                 href={orderUrl}
-                className="w-full bg-black text-white font-bold py-4 px-6 rounded-lg text-center"
+                className="w-full bg-black text-white font-bold py-4 px-6 rounded-lg text-center admin-button"
                 style={{
                   backgroundColor: '#000000',
                   color: '#ffffff',
@@ -196,15 +217,15 @@ function OrderPlacedAdminEmailComponent({ order }: OrderPlacedAdminEmailProps) {
           </Container>
 
           {/* Footer */}
-          <Section className="bg-neutral-800 text-white p-6 mt-6 rounded-lg">
-            <Row className="mb-4">
-              <Column align="center">
+          <Section className="bg-neutral-800 text-white p-6 mt-6 rounded-lg" style={{ backgroundColor: '#262626', colorScheme: 'light' }}>
+            <Row className="mb-4" style={{ backgroundColor: '#262626' }}>
+              <Column align="center" style={{ backgroundColor: '#262626' }}>
                 <Img 
-                  src="https://raqueto.shop/Logo.png" 
+                  src="https://raqueto.shop/raqueto-logo-white.png" 
                   alt="Raqueto" 
-                  width="120" 
-                  height="28"
-                  style={{ display: 'block', margin: '0 auto 16px auto' }}
+                  width="140" 
+                  height="auto"
+                  style={{ display: 'block', margin: '0 auto 16px auto', backgroundColor: '#262626' }}
                 />
               </Column>
             </Row>

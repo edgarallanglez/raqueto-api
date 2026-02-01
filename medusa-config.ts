@@ -8,10 +8,10 @@ const commonRedisOptions = {
 
   // 2. Connection Settings - More lenient timeouts
   connectTimeout: 10000, // 10s for initial connection
-  
+
   // 3. KeepAlive - Prevent idle connection drops
   keepAlive: 30000, // Send keepalive every 30s
-  
+
   // 4. CRITICAL: Disable maxRetriesPerRequest for Medusa compatibility
   // Allows ioredis to queue commands during reconnection instead of failing
   maxRetriesPerRequest: null,
@@ -22,7 +22,7 @@ const commonRedisOptions = {
   lazyConnect: true, // Lazy connect to avoid blocking startup
   autoResubscribe: true,
   autoResendUnfulfilledCommands: true,
-  
+
   // 6. Retry Strategy - Exponential backoff with reasonable limits
   retryStrategy(times: number) {
     if (times > 10) {
@@ -79,6 +79,14 @@ module.exports = defineConfig({
         isQueryable: true,
       },
     },
+    // Collection Image Module (Custom)
+    {
+      resolve: "./src/modules/collection-image",
+      options: {},
+      definition: {
+        isQueryable: true,
+      },
+    },
     {
       resolve: "@medusajs/medusa/caching",
       options: {
@@ -96,7 +104,7 @@ module.exports = defineConfig({
     },
     {
       resolve: "@medusajs/medusa/event-bus-redis",
-      options: { 
+      options: {
         redisUrl: process.env.REDIS_URL,
         redisOptions: commonRedisOptions,
       },
@@ -105,8 +113,8 @@ module.exports = defineConfig({
       resolve: "@medusajs/medusa/workflow-engine-redis",
       options: {
         redis: {
-          url: process.env.REDIS_URL,
-          options: commonRedisOptions,
+          redisUrl: process.env.REDIS_URL,
+          redisOptions: commonRedisOptions,
         },
       },
     },

@@ -24,20 +24,53 @@ function NewsletterWelcomeEmailComponent({ email, promoCode = "WELCOME5" }: News
   return (
     <Tailwind>
       <Html className="font-sans bg-neutral-50">
-      <Head />
+      <Head>
+        <meta name="color-scheme" content="light" />
+        <meta name="supported-color-schemes" content="light" />
+        <style>{`
+          @media (prefers-color-scheme: dark) {
+            .accent-bar {
+              background-color: #E0FA5B !important;
+            }
+            .promo-section {
+              // background-color: #E0FA5B !important;
+            }
+            .promo-section * {
+              color: #fff !important;
+            }
+            .promo-code-box {
+              background-color: #E0FA5B !important;
+              border-color: #E0FA5B !important;
+              color: #ffffff !important;
+            }
+            .promo-code-text {
+              color: #000000 !important;
+            }
+            .cta-button {
+              background-color: #021326 !important;
+              color: #E0FA5B !important;
+            }
+            .footer-logo {
+              filter: none !important;
+              opacity: 1 !important;
+            }
+          }
+        `}</style>
+      </Head>
         <Preview>¡Bienvenido a Raqueto! 🎾 Aquí tienes tu código de descuento exclusivo</Preview>
         <Body className="bg-neutral-50 my-0 mx-auto w-full">
           {/* Header */}
-          <Section className="text-white px-8 py-6" style={{ backgroundColor: '#021326' }}>
-            <Container className="max-w-2xl mx-auto">
-              <Row>
-                <Column align="center">
+          <Section className="text-white px-8 py-6" style={{ backgroundColor: '#021326', colorScheme: 'light' }}>
+            <Container className="max-w-2xl mx-auto" style={{ backgroundColor: '#021326' }}>
+              <Row style={{ backgroundColor: '#021326' }}>
+                <Column align="center" style={{ backgroundColor: '#021326' }}>
                   <Img
                     src="https://raqueto.shop/raqueto-logo-white.png"
                     alt="Raqueto Logo"
-                    width="180"
-                    height="42"
+                    width="200"
+                    height="auto"
                     className="mx-auto"
+                    style={{ backgroundColor: '#021326' }}
                   />
                 </Column>
               </Row>
@@ -45,7 +78,7 @@ function NewsletterWelcomeEmailComponent({ email, promoCode = "WELCOME5" }: News
           </Section>
 
           {/* Accent Bar */}
-          <Section className="bg-[#E0FA5B] h-2" />
+          <Section className="bg-[#E0FA5B] h-2 accent-bar" style={{ backgroundColor: '#E0FA5B', colorScheme: 'light', height: '8px' }} />
 
           {/* Main Content */}
           <Container className="max-w-2xl mx-auto bg-white my-8 rounded-lg shadow-sm p-10">
@@ -90,45 +123,47 @@ function NewsletterWelcomeEmailComponent({ email, promoCode = "WELCOME5" }: News
             </Section>
 
             {/* Promo Code Section */}
-            <Section className="my-8 p-8 rounded-xl text-center" style={{ background: 'linear-gradient(135deg, #E0FA5B 0%, #B8D147 100%)' }}>
-              <Text className="text-neutral-900 text-xl font-bold mb-4" style={{ margin: '0 0 16px 0' }}>
+            <Section className="my-8 p-8 rounded-xl text-center promo-section" style={{ colorScheme: 'light' }}>
+              <Text className="text-neutral-900 text-xl font-bold mb-4" style={{ margin: '0 0 16px 0', color: '#000000' }}>
                 ¡Aquí está tu regalo de bienvenida! 🎁, recuerda que debes registrarte para poder usar tu código de descuento
               </Text>
-              <Text className="text-neutral-800 text-base mb-6" style={{ margin: '0 0 24px 0' }}>
+              <Text className="text-neutral-800 text-base mb-6" style={{ margin: '0 0 24px 0', color: '#000000' }}>
                 Usa este código en tu primera compra:
               </Text>
               <div 
+                className="promo-code-box"
                 style={{ 
-                  backgroundColor: '#ffffff',
-                  border: '3px dashed #021326',
+                  backgroundColor: '#E0FA5B',
+                  border: '3px dashed #E0FA5B',
                   borderRadius: '12px',
                   padding: '24px',
                   marginBottom: '24px'
                 }}
               >
                 <Text 
-                  className="text-4xl font-black tracking-wider" 
+                  className="text-4xl tracking-wider promo-code-text" 
                   style={{ 
                     margin: 0,
-                    color: '#021326',
+                    color: '#000000',
                     letterSpacing: '0.1em',
-                    fontFamily: 'monospace'
+                    fontFamily: 'monospace',
+                    fontWeight: 'bold'
                   }}
                 >
                   {promoCode}
                 </Text>
               </div>
-              <Text className="text-neutral-800 text-lg font-semibold" style={{ margin: 0 }}>
+              <Text className="text-neutral-800 text-lg font-semibold" style={{ margin: 0, color: '#000000' }}>
                 5% de descuento en el total de tu primera compra
               </Text>
-              <Text className="text-neutral-700 text-sm mt-2" style={{ margin: '8px 0 0 0' }}>
+              <Text className="text-neutral-700 text-sm mt-2" style={{ margin: '8px 0 0 0', color: '#000000' }}>
                 * Aplicable en productos seleccionados. Válido por 30 días.
               </Text>
             </Section>
 
             <Section className="text-center my-10">
               <Button
-                className="rounded-lg text-black text-base font-bold no-underline text-center px-8 py-4"
+                className="rounded-lg text-black text-base font-bold no-underline text-center px-8 py-4 cta-button"
                 href="https://raqueto.shop/store"
                 style={{
                   backgroundColor: '#021326',
@@ -188,15 +223,16 @@ function NewsletterWelcomeEmailComponent({ email, promoCode = "WELCOME5" }: News
           </Container>
 
           {/* Footer */}
-          <Section className="bg-gray-50 p-6 mt-10">
-            <Row className="mb-6">
-              <Column align="center">
+          <Section className="bg-gray-50 p-6 mt-10" style={{ backgroundColor: '#f9fafb', colorScheme: 'light' }}>
+            <Row className="mb-6" style={{ backgroundColor: '#f9fafb' }}>
+              <Column align="center" style={{ backgroundColor: '#f9fafb' }}>
                 <Img
                   src="https://raqueto.shop/Logo.png"
                   alt="Raqueto Logo"
                   width="140"
-                  height="33"
+                  height="auto"
                   className="mx-auto"
+                  style={{ backgroundColor: '#f9fafb' }}
                 />
               </Column>
             </Row>

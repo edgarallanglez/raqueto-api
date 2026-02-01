@@ -50,20 +50,40 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
   return (
     <Tailwind>
       <Html className="font-sans bg-neutral-50">
-        <Head />
+        <Head>
+          <meta name="color-scheme" content="light" />
+          <meta name="supported-color-schemes" content="light" />
+          <style>{`
+            @media (prefers-color-scheme: dark) {
+              .accent-bar {
+                background-color: #E0FA5B !important;
+              }
+              .total-section {
+                background-color: #E0FA5B !important;
+              }
+              .total-section * {
+                color: #000000 !important;
+              }
+              .footer-logo {
+                filter: none !important;
+                opacity: 1 !important;
+              }
+            }
+          `}</style>
+        </Head>
         <Preview>Gracias por tu compra en Raqueto</Preview>
         <Body className="bg-white my-10 mx-auto w-full max-w-2xl">
           {/* Header */}
-          <Section className="text-white px-8 py-6" style={{ backgroundColor: '#021326' }}>
-            <Container className="max-w-2xl mx-auto">
-              <Row>
-                <Column align="center">
+          <Section className="text-white px-8 py-6" style={{ backgroundColor: '#021326', colorScheme: 'light' }}>
+            <Container className="max-w-2xl mx-auto" style={{ backgroundColor: '#021326' }}>
+              <Row style={{ backgroundColor: '#021326' }}>
+                <Column align="center" style={{ backgroundColor: '#021326' }}>
                   <Img 
                     src="https://raqueto.shop/raqueto-logo-white.png" 
                     alt="Raqueto" 
-                    width="180" 
-                    height="42"
-                    style={{ display: 'block', margin: '0 auto' }}
+                    width="200" 
+                    height="auto"
+                    style={{ display: 'block', margin: '0 auto', backgroundColor: '#021326' }}
                   />
                 </Column>
               </Row>
@@ -71,7 +91,7 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
           </Section>
 
           {/* Accent Bar */}
-          <Section className="bg-[#E0FA5B] h-2" />
+          <Section className="bg-[#E0FA5B] h-2 accent-bar" style={{ backgroundColor: '#E0FA5B', colorScheme: 'light', height: '8px', minHeight: '8px' }} />
 
           {/* Thank You Message */}
           <Container className="max-w-2xl mx-auto bg-white my-8 rounded-lg shadow-sm p-8">
@@ -198,19 +218,20 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
                 </Column>
               </Row> */}
               <Section 
-                className="mt-6 pt-6 rounded-lg p-4"
+                className="mt-6 pt-6 rounded-lg p-4 total-section"
                 style={{
                   backgroundColor: '#E0FA5B',
                   borderRadius: '8px',
-                  // padding: '16px'
+                  colorScheme: 'light',
+                  padding: '16px'
                 }}
               >
                 <Row>
                   <Column style={{ width: '50%' }}>
-                    <Text className="text-xl font-bold text-black" style={{ margin: '0' }}>Total</Text>
+                    <Text className="text-xl font-bold text-black" style={{ margin: '0', color: '#000000' }}>Total</Text>
                   </Column>
                   <Column style={{ width: '50%', textAlign: 'right' }}>
-                    <Text className="text-2xl font-bold text-black" style={{ margin: '0' }}>{formatPrice(order.total)}</Text>
+                    <Text className="text-2xl font-bold text-black" style={{ margin: '0', color: '#000000' }}>{formatPrice(order.total)}</Text>
                   </Column>
                 </Row>
               </Section>
@@ -218,15 +239,16 @@ function OrderPlacedEmailComponent({ order, email_banner }: OrderPlacedEmailProp
           </Container>
 
           {/* Footer */}
-          <Section className="bg-gray-50 p-6 mt-10">
-            <Row className="mb-6">
-                <Column align="center">
+          <Section className="bg-gray-50 p-6 mt-10 footer-section" style={{ backgroundColor: '#f9fafb', colorScheme: 'light' }}>
+            <Row className="mb-6" style={{ backgroundColor: '#f9fafb' }}>
+                <Column align="center" style={{ backgroundColor: '#f9fafb' }}>
                   <Img 
                     src="https://raqueto.shop/Logo.png" 
                     alt="Raqueto" 
-                    width="140" 
-                    height="33"
-                    style={{ display: 'block', margin: '0 auto' }}
+                    width="160" 
+                    height="auto"
+                    className="footer-logo"
+                    style={{ display: 'block', margin: '0 auto', backgroundColor: '#f9fafb' }}
                   />
                 </Column>
               </Row>
