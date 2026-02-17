@@ -34,15 +34,13 @@ gcloud run deploy medusa-raqueto-app \
     --image="us-central1-docker.pkg.dev/medusa-world/medusajs/medusa-raqueto-app:latest" \
     --region="us-central1" \
     --allow-unauthenticated \
-    --min-instances=1 \
+    --min-instances=0 \
     --max-instances=3 \
     --cpu=1 \
     --memory=1.5Gi \
     --port=8080 \
     --concurrency=80 \
-    --no-cpu-throttling \
     --timeout=300 \
-    --cpu-boost \
     --env-vars-file=env-server.yaml
 
 echo ""
