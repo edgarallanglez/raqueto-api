@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 x-medusa-env: &medusa-env
   NODE_ENV: production
@@ -37,7 +37,7 @@ x-medusa-env: &medusa-env
   REVALIDATION_SECRET: ${REVALIDATION_SECRET}
 
 services:
-  # 1. Medusa API (Server)
+  # 1) Medusa API (Server)
   medusa-server:
     build:
       context: .
@@ -49,29 +49,42 @@ services:
       MEDUSA_WORKER_MODE: server
       DISABLE_MEDUSA_ADMIN: "false"
     networks:
-      - dokploy-network # <--- Join the shared network
+      - dokploy-network
     labels:
       - "traefik.enable=true"
+
+      # HTTPS router
       - "traefik.http.routers.medusa-server.rule=Host(`api.raqueto.shop`)"
       - "traefik.http.routers.medusa-server.entrypoints=websecure"
+      - "traefik.http.routers.medusa-server.tls=true"
+      - "traefik.http.routers.medusa-server.tls.certresolver=letsencrypt"
+
+      # HTTP router -> redirect to HTTPS
+      - "traefik.http.routers.medusa-server-http.rule=Host(`api.raqueto.shop`)"
+      - "traefik.http.routers.medusa-server-http.entrypoints=web"
+      - "traefik.http.routers.medusa-server-http.middlewares=redirect-to-https"
+
+      # Redirect middleware
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+      # Service port inside container
       - "traefik.http.services.medusa-server.loadbalancer.server.port=9000"
 
-  # 2. Medusa Worker (Background Jobs)
+  # 2) Medusa Worker (Background Jobs)
   medusa-worker:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: medusa_worker
     restart: always
-    command: npm run start
+    command: yarn start
     environment:
       <<: *medusa-env
       MEDUSA_WORKER_MODE: worker
       DISABLE_MEDUSA_ADMIN: "true"
     networks:
-      - dokploy-network # <--- Join the shared network
+      - dokploy-network
 
-# Define the external network so Compose doesn't try to create it
 networks:
   dokploy-network:
     external: true
