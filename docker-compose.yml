@@ -1,5 +1,41 @@
 version: '3.8'
 
+x-medusa-env: &medusa-env
+  NODE_ENV: production
+  PORT: ${PORT:-9000}
+  LOG_LEVEL: ${LOG_LEVEL:-info}
+  MEDUSA_TELEMETRY_DISABLED: ${MEDUSA_TELEMETRY_DISABLED:-true}
+
+  DATABASE_URL: ${DATABASE_URL}
+  REDIS_URL: ${REDIS_URL}
+  JWT_SECRET: ${JWT_SECRET}
+  COOKIE_SECRET: ${COOKIE_SECRET}
+
+  MEDUSA_BACKEND_URL: ${MEDUSA_BACKEND_URL}
+  STORE_CORS: ${STORE_CORS}
+  ADMIN_CORS: ${ADMIN_CORS}
+  AUTH_CORS: ${AUTH_CORS}
+  VENDOR_CORS: ${VENDOR_CORS}
+
+  STRIPE_SECRET_API_KEY: ${STRIPE_SECRET_API_KEY}
+  STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+
+  RESEND_API_KEY: ${RESEND_API_KEY}
+  RESEND_FROM_EMAIL: ${RESEND_FROM_EMAIL}
+
+  POSTHOG_EVENTS_API_KEY: ${POSTHOG_EVENTS_API_KEY}
+  POSTHOG_HOST: ${POSTHOG_HOST}
+
+  S3_FILE_URL: ${S3_FILE_URL}
+  S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+  S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+  S3_REGION: ${S3_REGION}
+  S3_BUCKET: ${S3_BUCKET}
+  S3_ENDPOINT: ${S3_ENDPOINT}
+
+  STOREFRONT_URL: ${STOREFRONT_URL}
+  REVALIDATION_SECRET: ${REVALIDATION_SECRET}
+
 services:
   # 1. Medusa API (Server)
   medusa-server:
@@ -9,14 +45,9 @@ services:
     container_name: medusa_server
     restart: always
     environment:
-      - NODE_ENV=production
-      - PORT=9000
-      - MEDUSA_WORKER_MODE=server
-      # Point to the EXTERNAL Dokploy Database
-      - DATABASE_URL=${DATABASE_URL} 
-      - REDIS_URL=${REDIS_URL}
-      - JWT_SECRET=${JWT_SECRET}
-      - COOKIE_SECRET=${COOKIE_SECRET}
+      <<: *medusa-env
+      MEDUSA_WORKER_MODE: server
+      DISABLE_MEDUSA_ADMIN: "false"
     networks:
       - dokploy-network # <--- Join the shared network
     labels:
@@ -34,14 +65,9 @@ services:
     restart: always
     command: npm run start
     environment:
-      - NODE_ENV=production
-      - MEDUSA_WORKER_MODE=worker
-      - DISABLE_MEDUSA_ADMIN=true
-      # Point to the EXTERNAL Dokploy Database
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
-      - JWT_SECRET=${JWT_SECRET}
-      - COOKIE_SECRET=${COOKIE_SECRET}
+      <<: *medusa-env
+      MEDUSA_WORKER_MODE: worker
+      DISABLE_MEDUSA_ADMIN: "true"
     networks:
       - dokploy-network # <--- Join the shared network
 
