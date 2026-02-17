@@ -10,7 +10,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 # Copy full code
 COPY . .
-
+RUN yarn build
 # Install server dependencies separately (ensures wrap-ansi consistency)
 WORKDIR /app/.medusa/server
 RUN yarn install --frozen-lockfile
